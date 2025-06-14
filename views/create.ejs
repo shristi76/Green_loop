@@ -5,14 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Welcome</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+      z-index: 0;
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
-<body class="bg-zinc-900 text-white min-h-screen flex items-center justify-center">
-  <div class="text-center">
-    <h1 class="text-4xl font-bold mb-4">Welcome to My Website</h1>
-    <p class="text-lg mb-6 text-zinc-400">Please create an account or log in to continue.</p>
-    <div class="space-x-4">
-      <a href="/login" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition">Login</a>
-      <a href="/" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg transition">Logout</a>
+<body
+  class="bg-cover bg-center bg-no-repeat min-h-screen flex items-center justify-center text-white relative"
+  style="background-image: url('https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1600&q=80');"
+>
+  <div class="fade-in relative z-10 bg-zinc-900 bg-opacity-80 p-10 rounded-xl shadow-2xl w-full max-w-xl text-center">
+    <h1 class="text-4xl font-extrabold mb-4 text-green-400">♻️ Welcome to Green Loop</h1>
+    <p class="text-lg mb-6 text-gray-300">Be a part of the solution — Donate, Recycle, and Reuse wisely.</p>
+
+    <!-- Action Buttons -->
+    <div class="space-y-4">
+      <div>
+        <a href="/" class="inline-block px-6 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition duration-300 font-semibold">
+          Logout
+        </a>
+      </div>
+      <div class="space-x-4">
+        <a href="/donate" class="inline-block px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold rounded-lg transition duration-300">
+          Donate
+        </a>
+        <a href="/recycle" class="inline-block px-6 py-2 bg-emerald-500 hover:bg-emerald-600 text-black font-semibold rounded-lg transition duration-300">
+          Recycle
+        </a>
+      </div>
     </div>
   </div>
 </body>

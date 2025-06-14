@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donate Item</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-image: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1470&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .input-dark {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #918d8d;
+    }
+    .input-dark::placeholder {
+      color: rgba(201, 194, 194, 0.5);
+    }
+  </style>
+</head>
+<body class="text-white font-sans">
+
+  <div class="overlay p-6 sm:p-10">
+    <div class="max-w-2xl mx-auto bg-black/70 p-8 rounded-2xl shadow-2xl">
+      <h1 class="text-4xl font-bold mb-8 text-center text-green-400">🌿 Donate an Item</h1>
+
+      <form action="/donate" method="POST" enctype="multipart/form-data" class="space-y-6">
+        
+        <!-- Category -->
+        <div>
+          <label for="category" class="block mb-2 font-semibold text-white">Select Category</label>
+          <select name="category" id="category" class="w-full p-3 rounded-lg input-dark">
+            <option value="" disabled selected>Select an option</option>
+            <option value="clothes">Clothes</option>
+            <option value="books">Books</option>
+            <option value="electronics">Electronics</option>
+            <option value="toys">Toys</option>
+            <option value="others">Others</option>
+          </select>
+        </div>
+
+        <!-- Image Upload -->
+        <div>
+          <label for="image" class="block mb-2 font-semibold">Upload Image</label>
+          <input type="file" name="image" id="image" accept="image/*" class="w-full p-3 rounded-lg input-dark file:bg-green-600 file:text-white file:border-none file:px-4 file:py-2 file:rounded-md" />
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label for="description" class="block mb-2 font-semibold">Item Description</label>
+          <textarea name="description" id="description" rows="4" class="w-full p-3 rounded-lg input-dark" placeholder="Enter details about the item..."></textarea>
+        </div>
+
+        <!-- Map & NGO Dropdown -->
+        <div>
+          <label class="block mb-2 font-semibold">Select Nearby NGO</label>
+          <div id="map" class="w-full h-64 mb-4 rounded-lg border border-white/20 shadow-inner"></div>
+          <select name="selectedNgo" id="selectedNgo" class="w-full p-3 rounded-lg input-dark">
+            <option value="">Loading nearby NGOs...</option>
+          </select>
+        </div>
+
+        <!-- Submit -->
+        <div class="text-center">
+          <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg shadow-lg transition-all duration-300">Submit Donation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Leaflet CSS and JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+  <script>
+    const ngoList = [
+      { name: "Helping Hands NGO", lat: 28.6139, lng: 77.2090 },
+      { name: "Orphan Care Trust", lat: 28.6200, lng: 77.2200 },
+      { name: "Green Earth Foundation", lat: 28.6250, lng: 77.2150 }
+    ];
+
+    function initMap(lat, lng) {
+      const map = L.map('map').setView([lat, lng], 13);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      const userMarker = L.marker([lat, lng]).addTo(map);
+      userMarker.bindPopup("You are here").openPopup();
+
+      const dropdown = document.getElementById('selectedNgo');
+      dropdown.innerHTML = '<option value="">Select an NGO</option>';
+
+      ngoList.forEach((ngo) => {
+        const marker = L.marker([ngo.lat, ngo.lng]).addTo(map);
+        marker.bindPopup(ngo.name);
+
+        const option = document.createElement("option");
+        option.value = ngo.name;
+        option.text = ngo.name;
+        dropdown.appendChild(option);
+      });
+    }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          initMap(position.coords.latitude, position.coords.longitude);
+        },
+        () => {
+          alert("Geolocation failed. Showing default location (Delhi).");
+          initMap(28.6139, 77.2090);
+        }
+      );
+    } else {
+      alert("Geolocation not supported. Showing default location (Delhi).");
+      initMap(28.6139, 77.2090);
+    }
+  </script>
+</body>
+</html>
