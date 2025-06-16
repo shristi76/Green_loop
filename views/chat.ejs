@@ -1,9 +1,9 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title><%= title || "Mini Doctor - Medi-Buddy" %></title>
+  <title>Mini Doctor - Medi-Buddy</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,7 +19,7 @@
     h1 {
       margin: 2rem 0 1rem;
       text-align: center;
-      color: #5f27cd;
+      color: #02ff02;
       font-size: 2rem;
     }
 
@@ -82,7 +82,7 @@
 
     button {
       padding: 12px 18px;
-      background-color: #5f27cd;
+      background-color: #05ff05;
       color: white;
       border: none;
       border-radius: 12px;
@@ -111,18 +111,12 @@
   </style>
 </head>
 <body>
-  <h1>Welcome To Your eco-Buddy!</h1>
+  <h1>Welcome To Your ECO-Buddy!</h1>
 
-  <div id="chat">
-    <% if (messages && messages.length) { %>
-      <% messages.forEach(msg => { %>
-        <div class="bubble <%= msg.sender %>"><%= msg.text %></div>
-      <% }) %>
-    <% } %>
-  </div>
+  <div id="chat"></div>
 
   <div id="input-area">
-    <input type="text" id="input" placeholder="Ask a  question..." />
+    <input type="text" id="input" placeholder="Ask a medical question..." />
     <button onclick="sendMessage()">Send</button>
   </div>
 
@@ -155,4 +149,4 @@
     }
   </script>
 </body>
-</html> -->
+</html>

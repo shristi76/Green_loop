@@ -17,6 +17,7 @@
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: #918d8d;
     }
+
     .input-dark::placeholder {
       color: rgba(201, 194, 194, 0.5);
     }
@@ -28,8 +29,9 @@
     <div class="max-w-2xl mx-auto bg-black/70 p-8 rounded-2xl shadow-2xl">
       <h1 class="text-4xl font-bold mb-8 text-center text-green-400">🌿 Donate an Item</h1>
 
-      <form action="/donate" method="POST" enctype="multipart/form-data" class="space-y-6">
-        
+      <!-- FORM START -->
+      <form id="donationForm" enctype="multipart/form-data" class="space-y-6">
+
         <!-- Category -->
         <div>
           <label for="category" class="block mb-2 font-semibold text-white">Select Category</label>
@@ -76,6 +78,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
 
+  <!-- JavaScript Section -->
   <script>
     const ngoList = [
       { name: "Helping Hands NGO", lat: 28.6139, lng: 77.2090 },
@@ -106,10 +109,16 @@
       });
     }
 
+    // Geolocation for map and form submission
+    let userLatitude = null;
+    let userLongitude = null;
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          initMap(position.coords.latitude, position.coords.longitude);
+          userLatitude = position.coords.latitude;
+          userLongitude = position.coords.longitude;
+          initMap(userLatitude, userLongitude);
         },
         () => {
           alert("Geolocation failed. Showing default location (Delhi).");
@@ -120,6 +129,39 @@
       alert("Geolocation not supported. Showing default location (Delhi).");
       initMap(28.6139, 77.2090);
     }
+
+    // Form submit handler
+    const form = document.getElementById('donationForm');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      if (userLatitude && userLongitude) {
+        const userloc = `${userLatitude},${userLongitude}`;
+        formData.append('userloc', userloc);
+      } else {
+        alert("Unable to fetch location. Please enable location services.");
+        return;
+      }
+
+      fetch('/donate', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Submission failed.');
+        return res.text();
+      })
+      .then(data => {
+        console.log('Success:', data);
+        window.location.href = '/donation-success'; // Redirect or render accordingly
+      })
+      .catch(err => {
+        console.error('Error:', err);
+        alert('Failed to submit donation. Please try again.');
+      });
+    });
   </script>
 </body>
 </html>

@@ -505,21 +505,45 @@ app.post('/login', (req, res) => {
   });
 });
 
-// Donation handling
+// // Donation handling
+// app.post('/donate', upload.single('image'), (req, res) => {
+//   const { category, description, selectedNgo } = req.body;
+//   const imagePath = req.file ? req.file.filename : null;
+
+//   if (!category || !description || !imagePath || !selectedNgo) {
+//     return res.status(400).send('All fields are required.');
+//   }
+
+//   const sql = 'INSERT INTO donations (category, description, image_path, selected_ngo) VALUES (?, ?, ?, ?)';
+//   db.query(sql, [category, description, imagePath, selectedNgo], (err) => {
+//     if (err) return res.status(500).send('Database error.');
+//     res.render('donation-success');
+//   });
+// });
+
 app.post('/donate', upload.single('image'), (req, res) => {
-  const { category, description, selectedNgo } = req.body;
+  const { category, description, selectedNgo, userloc } = req.body;
   const imagePath = req.file ? req.file.filename : null;
 
-  if (!category || !description || !imagePath || !selectedNgo) {
-    return res.status(400).send('All fields are required.');
+  if (!category || !description || !imagePath || !selectedNgo || !userloc) {
+    return res.status(400).send('All fields including location are required.');
   }
 
-  const sql = 'INSERT INTO donations (category, description, image_path, selected_ngo) VALUES (?, ?, ?, ?)';
-  db.query(sql, [category, description, imagePath, selectedNgo], (err) => {
+  const sql = 'INSERT INTO donations (category, description, image_path, selected_ngo, userloc) VALUES (?, ?, ?, ?, ?)';
+  db.query(sql, [category, description, imagePath, selectedNgo, userloc], (err) => {
     if (err) return res.status(500).send('Database error.');
-    res.render('donation-success');
+    // res.render('donation-success');
+     res.json({ message: '🎉 Donation submitted successfully!' });
+    
+   
   });
 });
+
+app.get('/donation-success', (req, res) => {
+  res.render('donation-success');
+});
+
+
 
 // Recycle AI image analysis
 app.post('/recycle', upload.single('image'), async (req, res) => {
@@ -560,26 +584,87 @@ app.post('/recycle', upload.single('image'), async (req, res) => {
     }
 
     fs.unlinkSync(imagePath);
+res.send(`
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Analysis Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background: url('https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+        background-size: cover;
+        color: #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
 
-    res.send(`
-      <div style="text-align:center; padding:40px; background-color:yellow;">
-        <h2>♻️ AI Analysis Result</h2>
-        <p><strong>Detected Item:</strong> ${label}</p>
-        <p><strong>Item Age:</strong> ${age} months</p>
-        <p><strong>Suggestion:</strong> ${suggestion}</p>
-        <a href="/recycle" style="display:inline-block; margin-top:20px; background:#4CAF50; color:white; padding:10px 20px; border-radius:5px;">Analyze Another</a>
-        <a href="/create" style="display:inline-block; margin-top:20px; background:#4CAF50; color:white; padding:10px 20px; border-radius:5px;">Back to Dashboard</a>
-        <a href="/more" style="display:inline-block; margin-top:20px; background:#4CAF50; color:white; padding:10px 20px; border-radius:5px;">Get Detailed Tips</a>
-      </div>
-    `);
+      .result-container {
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 40px;
+        border-radius: 16px;
+        max-width: 600px;
+        width: 90%;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+
+      .result-container h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #2e7d32;
+      }
+
+      .result-container p {
+        font-size: 1.1rem;
+        margin: 10px 0;
+      }
+
+      .btn {
+        display: inline-block;
+        margin: 10px 8px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn:hover {
+        background-color: #388e3c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="result-container">
+      <h2>♻️ AI Analysis Result</h2>
+      <p><strong>Detected Item:</strong> ${label}</p>
+      <p><strong>Item Age:</strong> ${age} months</p>
+      <p><strong>Suggestion:</strong> ${suggestion}</p>
+
+      <a href="/recycle" class="btn">🔁 Analyze Another</a>
+      <a href="/create" class="btn">🏠 Back to Dashboard</a>
+      <a href="/chat" class="btn">💡 Get Detailed Tips</a>
+    </div>
+  </body>
+  </html>
+`);
+
   } catch (err) {
     console.error('Hugging Face API Error:', err.response?.data || err.message);
     res.status(500).send('Error analyzing the image');
   }
 });
 // Route to display more tips page
-app.get('/more', (req, res) => {
-  res.render('more', {
+app.get('/chat', (req, res) => {
+  res.render('chat', {
     title: 'Your Page Title',
     messages: [] // or some default message data
   });
@@ -587,41 +672,57 @@ app.get('/more', (req, res) => {
 
 
 
+// async function main() {
+//   const response = await ai.models.generateContent({
+//     model: "gemini-2.0-flash",
+//     contents: "Hello there",
+//     config: {
+//       systemInstruction: "You are a doctor.you will only reply to the problem related to medical human body issues,you have to solve query of user in simplest way.if user asked any question not related to medical reply them i am here only to help you as a mini doctor friend please asked relevant key",
+//     },
+//   });
+//   console.log(response.text);
+// }
+
+// await main();
+
+
+
+
+
+
+
+
+app.use(express.static('public')); // Serve HTML from public folder
+
+
+
 app.post('/ask', async (req, res) => {
   const userMessage = req.body.message;
-  try {
-    const model =  ai.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
-    const result = await model.generateContent({
-      contents: [
-        {
-          role: 'user',
-          parts: [{ text: userMessage }],
-        },
-      ],
-      generationConfig: {
-        temperature: 0.7,
-      },
-      systemInstruction: {
-        role: 'system',
-        parts: [
-          {
-            text: 'you are eco buddy reply only those questions which include environmental issue and sustainable ',
-          },
-        ],
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: userMessage,
+      config: {
+        systemInstruction:
+          "you are a eco buddy suggest some ideas related to recycle the products ,sustainable environment .only reply to those question which covers these",
       },
     });
 
-    const response = await result.response;
-    const text = response.text();
-    res.json({ reply: text });
+    res.json({ reply: response.text });
   } catch (err) {
-    console.error('Gemini API Error:', err.message || err);
     res.status(500).json({ error: 'AI request failed' });
   }
 });
 
 
+
+
+
+
+
+
+// Route to receive location and insert into DB
 
 
 // Start server
