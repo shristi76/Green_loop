@@ -1,4 +1,4 @@
-# ♻️ Green Loop — Giving Items a Second Life
+# ♻️ Green Loop — Join the loop. Plant a better tomorrow
 
 > A sustainable platform that connects unused items to those in need — through donations, AI-driven reuse ideas, and eco-friendly logistics.
 
