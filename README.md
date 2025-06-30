@@ -59,7 +59,7 @@ Every year, millions of usable items are thrown away. **Green Loop** bridges the
 - Empower delivery agents with flexible work
 
 ---
-DEMO LINK -https://drive.google.com/file/d/1cTJNx3YX11dJL2ZKuuBuXmi-wV4YvCMp/view?usp=drivesdk
+DEMO LINK -https://drive.google.com/file/d/1cVqedWLa8O9cnxrC-G_sOFZViVnvLqYB/view?usp=drivesdk
 ## 🚀 Getting Started Locally
 
 ```bash
