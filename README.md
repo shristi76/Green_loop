@@ -59,7 +59,7 @@ Every year, millions of usable items are thrown away. **Green Loop** bridges the
 - Empower delivery agents with flexible work
 
 ---
-DEMO LINK -
+DEMO LINK -https://drive.google.com/file/d/1cTJNx3YX11dJL2ZKuuBuXmi-wV4YvCMp/view?usp=drivesdk
 ## 🚀 Getting Started Locally
 
 ```bash
@@ -74,5 +74,5 @@ npm install
 # 3. Run the backend server
 node app.js
 ---
-DEMO= https://drive.google.com/file/d/1cTJNx3YX11dJL2ZKuuBuXmi-wV4YvCMp/view?usp=drivesdk
+
 
