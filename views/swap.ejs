@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Swap Item</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+  <div class="w-full max-w-md bg-white shadow-lg rounded-xl p-6">
+    <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">Upload Item for Swap</h1>
+
+    <form action="/swap" method="POST" enctype="multipart/form-data" class="space-y-4">
+      <div>
+        <label for="itemName" class="block font-medium text-gray-700">Item Name:</label>
+        <input type="text" name="itemName" id="itemName" required
+               class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200">
+      </div>
+
+      <div>
+        <label for="description" class="block font-medium text-gray-700">Description:</label>
+        <textarea name="description" id="description" rows="4" required
+                  class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"></textarea>
+      </div>
+
+      <div>
+        <label for="itemImage" class="block font-medium text-gray-700">Item Image:</label>
+        <input type="file" name="itemImage" id="itemImage" accept="image/*" required
+               class="w-full mt-1 p-1 border border-gray-300 rounded-md bg-white file:mr-4 file:py-2 file:px-4
+                      file:rounded-md file:border-0 file:text-sm file:font-semibold
+                      file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+      </div>
+
+      <div class="flex justify-between items-center">
+        <a href="/items" class="text-sm text-blue-600 hover:underline">View All Items</a>
+        <button type="submit"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition-all">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>
