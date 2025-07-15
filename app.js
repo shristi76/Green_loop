@@ -424,6 +424,7 @@ app.get('/notifications', (req, res) => {
     if (err) throw err;
     res.render('notifications', { notifications: results });
   });
+  
 });
 
 // Start server
