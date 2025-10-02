@@ -61,7 +61,6 @@ Every year, millions of usable items are thrown away. **Green Loop** bridges the
 - Empower delivery agents with flexible work
 
 ---
-DEMO LINK -https://drive.google.com/file/d/1cVqedWLa8O9cnxrC-G_sOFZViVnvLqYB/view?usp=drivesdk
 
 <img width="1918" height="977" alt="Screenshot 2025-08-31 224359" src="https://github.com/user-attachments/assets/36093fdc-36ed-4090-bf62-1c69d0c3a62d" />
 
@@ -106,7 +105,9 @@ npm install
 # 3. Run the backend server
 node app.js
 ---
+```
 
+Enjoy the Peace and Beauty of Nature
 
 
 
