@@ -23,6 +23,9 @@ Every year, millions of usable items are thrown away. **Green Loop** bridges the
 
 - 📸 **AI-Powered Reuse Advisor**  
   Unsure if an item is **recyclable** or **reusable**? Upload a photo and our AI suggests the best eco-friendly option.
+  
+- 📸 **CO2 Emission Forecastor**  
+  Forecast the next 20 years co2 emission based on country name as input.
 
 ---
 
@@ -46,8 +49,7 @@ Every year, millions of usable items are thrown away. **Green Loop** bridges the
 | **Backend**  | Node.js, Express.js                        |
 | **Database** | MongoDB                                    |
 | **AI Tools** | Image recognition + reuse suggestion model |
-| **Tracking** | Real-time delivery updates (WebSocket/API) |
-| **PDF Tools**| `html2pdf.js` for donation receipts         |
+
 
 ---
 
@@ -60,8 +62,38 @@ Every year, millions of usable items are thrown away. **Green Loop** bridges the
 
 ---
 DEMO LINK -https://drive.google.com/file/d/1cVqedWLa8O9cnxrC-G_sOFZViVnvLqYB/view?usp=drivesdk
-## 🚀 Getting Started Locally
 
+<img width="1918" height="977" alt="Screenshot 2025-08-31 224359" src="https://github.com/user-attachments/assets/36093fdc-36ed-4090-bf62-1c69d0c3a62d" />
+
+
+
+
+
+---
+
+<img width="1909" height="917" alt="Screenshot 2025-08-31 224748" src="https://github.com/user-attachments/assets/6c94c613-733c-43e7-bc47-0a6d301304c6" />
+
+---
+
+<img width="1898" height="866" alt="Screenshot 2025-09-01 000823" src="https://github.com/user-attachments/assets/366df22a-3179-4078-842e-16997f3e99bc" />
+
+---
+
+<img width="1919" height="906" alt="Screenshot 2025-09-01 001304" src="https://github.com/user-attachments/assets/9f62ce39-f24d-4ecb-babc-711491022e16" />
+
+---
+
+<img width="1919" height="906" alt="Screenshot 2025-09-01 082656" src="https://github.com/user-attachments/assets/d88861fc-8b4e-483b-81c0-b69cd7b472e8" />
+
+---
+
+<img width="1912" height="962" alt="Screenshot 2025-08-31 224445" src="https://github.com/user-attachments/assets/c7c7aaee-ec85-4f21-b7ba-f0872e15e3a1" />
+
+---
+
+
+
+## 🚀 Getting Started Locally
 ```bash
 # 1. Clone the repository
 git clone https://github.com/shristi76/green_loop.git
@@ -74,5 +106,11 @@ npm install
 # 3. Run the backend server
 node app.js
 ---
+
+
+
+
+
+
 
 
