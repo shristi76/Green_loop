@@ -47,7 +47,7 @@ Every year, millions of usable items are thrown away. **Green Loop** bridges the
 |--------------|--------------------------------------------|
 | **Frontend** | EJS, Tailwind CSS, JavaScript             |
 | **Backend**  | Node.js, Express.js                        |
-| **Database** | MongoDB                                    |
+| **Database** | mysql                                      |
 | **AI Tools** | Image recognition + reuse suggestion model |
 
 
