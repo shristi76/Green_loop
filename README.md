@@ -62,6 +62,11 @@ Every year, millions of usable items are thrown away. **Green Loop** bridges the
 
 ---
 
+![Uploading Screenshot 2025-10-23 115245.png…]()
+
+---
+
+
 <img width="1918" height="977" alt="Screenshot 2025-08-31 224359" src="https://github.com/user-attachments/assets/36093fdc-36ed-4090-bf62-1c69d0c3a62d" />
 
 
@@ -87,6 +92,10 @@ Every year, millions of usable items are thrown away. **Green Loop** bridges the
 ---
 
 <img width="1912" height="962" alt="Screenshot 2025-08-31 224445" src="https://github.com/user-attachments/assets/c7c7aaee-ec85-4f21-b7ba-f0872e15e3a1" />
+
+---
+
+<img width="1880" height="911" alt="Screenshot 2025-09-01 000440" src="https://github.com/user-attachments/assets/460669e3-3ef4-4ac5-ae4f-32e7b267f279" />
 
 ---
 
