@@ -62,7 +62,8 @@ Every year, millions of usable items are thrown away. **Green Loop** bridges the
 
 ---
 
-![Uploading Screenshot 2025-10-23 115245.png…]()
+<img width="1894" height="884" alt="Screenshot 2025-10-23 115245" src="https://github.com/user-attachments/assets/9371929d-1e08-47c8-a9a4-40f7a067a6b5" />
+
 
 ---
 
@@ -110,6 +111,7 @@ cd green_loop
 # 2. Install backend dependencies
 cd backend
 npm install
+create .env file and add your api keys of gemini and hugging face
 
 # 3. Run the backend server
 node app.js
